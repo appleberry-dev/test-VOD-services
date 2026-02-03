@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.youtube.com https://*.bunny.net https://*.cloudflare.com https://cdn.tailwindcss.com https://unpkg.com;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming Test Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800" data-page-id="dashboard">
+
+    <!-- GNB -->
+    <nav class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <i data-lucide="monitor-play" class="text-blue-600 w-6 h-6"></i>
+            <span class="font-bold text-lg tracking-tight text-slate-900">EduStream <span
+                    class="text-blue-600 font-medium">TestLab</span></span>
+        </div>
+        <div class="text-sm text-slate-500 font-medium">
+            Project: VOD Solution Comparison
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+
+        <header class="mb-12 text-center">
+            <h1 class="text-3xl font-bold text-slate-900 mb-3">비디오 스트리밍 솔루션 테스트</h1>
+            <p class="text-slate-500 max-w-2xl mx-auto">
+                교육용 플랫폼에 최적화된 스트리밍 서비스를 선정하기 위한 테스트 대시보드입니다.<br>
+                각 항목을 클릭하여 재생 성능, 버퍼링 속도, UI 커스텀 용이성을 점검하세요.
+            </p>
+        </header>
+
+        <!-- Cards Grid (Decision Guide) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <!-- Bunny.net Card -->
+            <a href="bunny-test.html"
+                class="group block bg-white rounded-2xl border border-slate-200 p-8 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-100 transition-colors">
+                    <i data-lucide="rabbit" class="text-orange-500 w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Bunny.net Stream</h3>
+                <div class="text-sm text-slate-500 mb-6 space-y-2">
+                    <p class="font-semibold text-slate-700">🏆 추천: 가성비 & 보안 중심</p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>저렴한 대역폭 비용 (CDN 강점)</li>
+                        <li>DRM/Token 보안 기능 내장</li>
+                        <li>커스텀 플레이어 제공 (광고 없음)</li>
+                    </ul>
+                </div>
+                <div class="flex items-center text-blue-600 font-semibold text-sm group-hover:underline">
+                    테스트 페이지 이동 <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                </div>
+            </a>
+
+            <!-- YouTube Card -->
+            <a href="youtube-test.html"
+                class="group block bg-white rounded-2xl border border-slate-200 p-8 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-100 transition-colors">
+                    <i data-lucide="youtube" class="text-red-500 w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">YouTube Embed</h3>
+                <div class="text-sm text-slate-500 mb-6 space-y-2">
+                    <p class="font-semibold text-slate-700">💡 추천: 무료 & 마케팅용</p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>완전 무료 호스팅 & 무제한 트래픽</li>
+                        <li>익숙한 UX와 최고의 호환성</li>
+                        <li><span class="text-red-500">단점:</span> 광고/경쟁사 추천 영상 노출</li>
+                    </ul>
+                </div>
+                <div class="flex items-center text-blue-600 font-semibold text-sm group-hover:underline">
+                    테스트 페이지 이동 <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                </div>
+            </a>
+
+            <!-- Cloudflare Stream Card -->
+            <a href="cloudflare-test.html"
+                class="group block bg-white rounded-2xl border border-slate-200 p-8 transition-all duration-300 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1">
+                <div
+                    class="w-14 h-14 bg-amber-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-amber-100 transition-colors">
+                    <i data-lucide="cloud-lightning" class="text-amber-500 w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Cloudflare Stream</h3>
+                <div class="text-sm text-slate-500 mb-6 space-y-2">
+                    <p class="font-semibold text-slate-700">🚀 추천: 성능 & 개발 유연성</p>
+                    <ul class="list-disc pl-4 space-y-1">
+                        <li>전송 속도가 가장 빠름 (Global CDN)</li>
+                        <li>API 기반의 강력한 제어권</li>
+                        <li>개발자 친화적 (Serverless 통합 용이)</li>
+                    </ul>
+                </div>
+                <div class="flex items-center text-blue-600 font-semibold text-sm group-hover:underline">
+                    테스트 페이지 이동 <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-sm text-slate-400">
+        &copy; 2025 Team Nova. Video Solution Testbed.
+    </footer>
+
+    <script src="asset/app.js"></script>
+</body>
+
+</html>

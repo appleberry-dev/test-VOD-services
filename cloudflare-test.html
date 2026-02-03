@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.youtube.com https://*.bunny.net https://*.cloudflare.com https://cdn.tailwindcss.com https://unpkg.com;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare Stream Test - EduStream</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800" data-page-id="test_r2">
+
+    <!-- Header -->
+    <nav class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <a href="index.html"
+                class="flex items-center justify-center w-8 h-8 rounded-full hover:bg-slate-100 text-slate-500 transition-colors">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </a>
+            <div class="flex items-center gap-2 border-l border-slate-200 pl-4">
+                <i data-lucide="cloud-lightning" class="text-amber-500 w-5 h-5"></i>
+                <span class="font-bold text-lg text-slate-900">Cloudflare Stream</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold px-2 py-1 bg-amber-50 text-amber-600 rounded">TEST MODE</span>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- Left Column -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- Player Container -->
+                <div class="bg-black rounded-xl overflow-hidden shadow-2xl aspect-video relative group">
+                    <!-- Cloudflare Stream Embed -->
+                    <iframe
+                        src="https://iframe.cloudflarestream.com/c286162ca4f481a3f78bcc9d7fbe1355?preload=true&poster=https%3A%2F%2Fvideodelivery.net%2Fc286162ca4f481a3f78bcc9d7fbe1355%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D7s%26height%3D720"
+                        class="absolute top-0 left-0 w-full h-full border-none"
+                        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Info -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i data-lucide="database" class="w-5 h-5 text-amber-500"></i> Cloudflare Stream 확인
+                    </h2>
+                    <div class="space-y-3 text-sm text-slate-600">
+                        <div class="flex gap-3">
+                            <span class="font-bold w-20 shrink-0 text-slate-800">Adaptive</span>
+                            <p>네트워크 상태에 따라 HLS/DASH 자동 전환 (Cloudflare 관리형).</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-bold w-20 shrink-0 text-slate-800">Poster</span>
+                            <p>영상 7초 구간 썸네일 자동 추출 적용됨.</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="font-bold w-20 shrink-0 text-slate-800">Storage</span>
+                            <p>R2 연동 또는 Stream Images를 통한 통합 관리.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notes -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-900 mb-2">테스트 기록 노트</h2>
+                    <textarea id="performance-note"
+                        class="w-full h-32 p-4 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all resize-none text-sm placeholder-slate-400"
+                        placeholder="예: 500MB 파일 재생 시 초기 버퍼링 시간 측정..."></textarea>
+                </div>
+
+            </div>
+
+
+            <!-- Right Column -->
+            <div class="lg:col-span-1 space-y-6">
+
+                <!-- Progress -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Progress</span>
+                        <span id="progress-text" class="text-2xl font-bold text-amber-600">0%</span>
+                    </div>
+                    <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                        <div id="progress-bar-fill" class="h-full bg-amber-600 w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <!-- Checklist -->
+                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                    <div class="bg-slate-50 px-6 py-4 border-b border-slate-200">
+                        <h3 class="font-bold text-slate-800">검증 항목</h3>
+                    </div>
+                    <div class="p-2">
+                        <label
+                            class="flex items-start gap-3 p-3 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                            <input type="checkbox" data-task="stream_play"
+                                class="mt-1 w-5 h-5 text-amber-600 rounded border-slate-300 focus:ring-amber-500">
+                            <div class="text-sm">
+                                <span class="block font-medium text-slate-700">스트리밍 재생 안정성</span>
+                                <span class="text-slate-400 text-xs">끊김 없이 Adaptive Bitrate 작동 여부</span>
+                            </div>
+                        </label>
+
+                        <label
+                            class="flex items-start gap-3 p-3 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                            <input type="checkbox" data-task="seeking_speed"
+                                class="mt-1 w-5 h-5 text-amber-600 rounded border-slate-300 focus:ring-amber-500">
+                            <div class="text-sm">
+                                <span class="block font-medium text-slate-700">탐색(Seek) 속도</span>
+                                <span class="text-slate-400 text-xs">임의 구간 점프 시 반응 속도</span>
+                            </div>
+                        </label>
+
+                        <label
+                            class="flex items-start gap-3 p-3 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                            <input type="checkbox" data-task="controls"
+                                class="mt-1 w-5 h-5 text-amber-600 rounded border-slate-300 focus:ring-amber-500">
+                            <div class="text-sm">
+                                <span class="block font-medium text-slate-700">플레이어 컨트롤 UI</span>
+                                <span class="text-slate-400 text-xs">볼륨, 전체화면, PIP 모드 확인</span>
+                            </div>
+                        </label>
+
+                        <label
+                            class="flex items-start gap-3 p-3 hover:bg-slate-50 rounded-lg cursor-pointer transition-colors">
+                            <input type="checkbox" data-task="dl_speed"
+                                class="mt-1 w-5 h-5 text-amber-600 rounded border-slate-300 focus:ring-amber-500">
+                            <div class="text-sm">
+                                <span class="block font-medium text-slate-700">다운로드/로딩 속도</span>
+                                <span class="text-slate-400 text-xs">CDN 캐싱 체감 성능</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="asset/app.js"></script>
+</body>
+
+</html>
